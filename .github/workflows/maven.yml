@@ -22,7 +22,7 @@ jobs:
       run: mvn -B package --file pom.xml
 
     - name: BuildDockerImage
-        run: docker build . --file Dockerfile --tag docker:$(date +%s)
+        run: docker build . --file Dockerfile --tag docker:0.1
         - name: Publish to Docker Repository
           uses: elgohr/Publish-Docker-Github-Action@master
           with:
