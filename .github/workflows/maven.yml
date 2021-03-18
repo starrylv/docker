@@ -20,11 +20,14 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: BuildDockerImage
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-    - name: Publish to Docker Repository
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: registry.cn-hangzhou.aliyuncs.com/mydockerpractice/adon:adon
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+    - uses: actions/checkout@v1
+    - name: docker build and push aliyun
+      env:
+        aliyun_username: ${{ secrets.DOCKER_USERNAME }}
+        aliyun_password: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        sudo docker login --username=${aliyun_username} registry.cn-hangzhou.aliyuncs.com --password=${aliyun_password}
+        sudo docker build -t docker:0.1 .
+        sudo docker tag docker:0.1 registry.cn-hangzhou.aliyuncs.com/mydockerpractice/adon:0.1
+        sudo docker push registry.cn-hangzhou.aliyuncs.com/mydockerpractice/adon:0.1
+
