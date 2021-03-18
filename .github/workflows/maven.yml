@@ -27,7 +27,7 @@ jobs:
         aliyun_password: ${{ secrets.DOCKER_PASSWORD }}
       run: |
         sudo docker login --username=${aliyun_username} registry.cn-hangzhou.aliyuncs.com --password=${aliyun_password}
-        sudo docker build -t docker:0.1 .
+        sudo docker build . --file Dockerfile --tag docker:0.1
         sudo docker tag docker:0.1 registry.cn-hangzhou.aliyuncs.com/mydockerpractice/adon:0.1
         sudo docker push registry.cn-hangzhou.aliyuncs.com/mydockerpractice/adon:0.1
 
