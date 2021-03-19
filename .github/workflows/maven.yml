@@ -9,9 +9,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 1.8
@@ -50,4 +48,4 @@ jobs:
           docker rmi -f $(docker images registry.cn-hangzhou.aliyuncs.com/mydockerpractice/adon -q)
           docker login --username=${{ secrets.DOCKER_USERNAME }} registry.cn-hangzhou.aliyuncs.com --password=${{ secrets.DOCKER_PASSWORD }}
           docker pull registry.cn-hangzhou.aliyuncs.com/mydockerpractice/adon:0.1
-          docker run -d -p 8000:8080 registry.cn-hangzhou.aliyuncs.com/mydockerpractice/adon:0.1
+          docker run -d -p 8080:8080 registry.cn-hangzhou.aliyuncs.com/mydockerpractice/adon:0.1
